@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto MVP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Login</a></li>
+                <li><a href="{{ url_for('cadastro') }}">Cadastro</a></li>
+                <li><a href="{{ url_for('eventos') }}">Gerenciar Eventos</a></li>
+                <li><a href="{{ url_for('inscricoes') }}">Inscrição em Eventos</a></li>
+                <li><a href="{{ url_for('visualizacao') }}">Visualização de Eventos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% extends 'base.html' %}
+
+        {% block content %}
+        <section class="inscricoes">
+            <h1>Inscrição em Eventos</h1>
+            <ul>
+                {% for evento in eventos %}
+                <li>
+                    <strong>{{ evento['titulo'] }}</strong> - {{ evento['descricao'] }}
+                    <form method="post" action="/inscricao/{{ evento['id'] }}">
+                        <button type="submit">Inscrever-se</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        
+            <h2>Eventos Inscritos</h2>
+            <ul>
+                {% for evento in eventos_inscritos %}
+                <li>
+                    <strong>{{ evento['titulo'] }}</strong>
+                    <form method="post" action="/cancelar/{{ evento['id'] }}">
+                        <button type="submit">Cancelar Inscrição</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 - Projeto MVP</p>
+    </footer>
+</body>
+</html>

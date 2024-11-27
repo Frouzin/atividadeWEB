@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto MVP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Login</a></li>
+                <li><a href="{{ url_for('cadastro') }}">Cadastro</a></li>
+                <li><a href="{{ url_for('eventos') }}">Gerenciar Eventos</a></li>
+                <li><a href="{{ url_for('inscricoes') }}">Inscrição em Eventos</a></li>
+                <li><a href="{{ url_for('visualizacao') }}">Visualização de Eventos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% extends 'base.html' %}
+
+        {% block content %}
+        <section class="eventos">
+            <h1>Gerenciar Eventos</h1>
+            <form method="POST">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required>
+                
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" required></textarea>
+                
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" required>
+                
+                <button type="submit">Criar Evento</button>
+            </form>            
+        
+            <h2>Eventos Existentes</h2>
+            <ul>
+                {% for evento in eventos %}
+                <li>
+                    <strong>{{ evento['titulo'] }}</strong> - {{ evento['descricao'] }}
+                    <form method="post" action="/eventos/{{ evento['id'] }}/editar" style="display:inline;">
+                        <button type="submit">Editar</button>
+                    </form>
+                    <form method="post" action="/eventos/{{ evento['id'] }}/deletar" style="display:inline;">
+                        <button type="submit">Excluir</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 - Projeto MVP</p>
+    </footer>
+</body>
+</html>
