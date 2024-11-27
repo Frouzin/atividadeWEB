@@ -1,61 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projeto MVP</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Login</a></li>
-                <li><a href="{{ url_for('cadastro') }}">Cadastro</a></li>
-                <li><a href="{{ url_for('eventos') }}">Gerenciar Eventos</a></li>
-                <li><a href="{{ url_for('inscricoes') }}">Inscrição em Eventos</a></li>
-                <li><a href="{{ url_for('visualizacao') }}">Visualização de Eventos</a></li>
-            </ul>
-        </nav>
-    </header>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/gerenciar_eventos.css') }}" />
+  </head>
+  <body>
     <main>
-        {% extends 'base.html' %}
+      {% extends 'base.html' %} {% block content %}
+      <section class="eventos content-input">
+        <h1>Gerenciar Eventos</h1>
+        <form class="form" method="POST">
+          <div>
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required />
+          </div>
+          <div>
+            <label for="descricao">Descrição:</label>
+            <textarea
+              style="height: 6em; font-size: 1em"
+              id="descricao"
+              name="descricao"
+              required></textarea>
+          </div>
+          <div>
+            <label for="data">Data:</label>
+            <input type="date" id="data" name="data" required />
+          </div>
+          <div>
+            <label for="local">Local:</label>
+            <select style="width: 105%" name="local" id="local">
+              <option value="presencial">presencial</option>
+              <option value="online">online</option>
+            </select>
+          </div>
+          <div>
+            <label for="titulo">Limite de participantes:</label>
+            <input type="number" id="limite" name="limite" required />
+          </div>
+          <div>
+            <label for="titulo">Opcao de inscricao:</label>
+            <input type="text" id="opcao" name="opcao" required />
+          </div>
+          <button type="submit">Criar Evento</button>
+        </form>
 
-        {% block content %}
-        <section class="eventos">
-            <h1>Gerenciar Eventos</h1>
-            <form method="POST">
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" required>
-                
-                <label for="descricao">Descrição:</label>
-                <textarea id="descricao" name="descricao" required></textarea>
-                
-                <label for="data">Data:</label>
-                <input type="date" id="data" name="data" required>
-                
-                <button type="submit">Criar Evento</button>
-            </form>            
-        
-            <h2>Eventos Existentes</h2>
-            <ul>
-                {% for evento in eventos %}
-                <li>
-                    <strong>{{ evento['titulo'] }}</strong> - {{ evento['descricao'] }}
-                    <form method="post" action="/eventos/{{ evento['id'] }}/editar" style="display:inline;">
-                        <button type="submit">Editar</button>
-                    </form>
-                    <form method="post" action="/eventos/{{ evento['id'] }}/deletar" style="display:inline;">
-                        <button type="submit">Excluir</button>
-                    </form>
-                </li>
-                {% endfor %}
-            </ul>
-        </section>
-        {% endblock %}
+        <h1>Eventos Existentes</h2>
+        <ul>
+          {% for evento in eventos %}
+          <li>
+            <strong>{{ evento['titulo'] }}</strong> - {{ evento['descricao'] }}
+            <form
+              method="post"
+              action="/eventos/{{ evento['id'] }}/editar"
+              style="display: inline">
+              <button type="submit">Editar</button>
+            </form>
+            <form
+              method="post"
+              action="/eventos/{{ evento['id'] }}/deletar"
+              style="display: inline">
+              <button type="submit">Excluir</button>
+            </form>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endblock %}
     </main>
     <footer>
-        <p>&copy; 2024 - Projeto MVP</p>
+      <p>&copy; 2024 - Projeto MVP</p>
     </footer>
-</body>
+  </body>
 </html>

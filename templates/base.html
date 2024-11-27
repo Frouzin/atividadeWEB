@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto MVP</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>{% block title %}Projeto MVP{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <header>
+        <img src="{{ url_for('static', filename='img/logo.png')}}" alt="Logo do Projeto">
         <nav>
             <ul>
                 <li><a href="{{ url_for('index') }}">Login</a></li>
@@ -18,8 +19,8 @@
             </ul>
         </nav>
     </header>
-    <main>
-
+    <main class="conteudo">
+        {% block content %}{% endblock %}
     </main>
     <footer>
         <p>&copy; 2024 - Projeto MVP</p>

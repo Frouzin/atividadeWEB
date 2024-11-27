@@ -1,46 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projeto MVP</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Login</a></li>
-                <li><a href="{{ url_for('cadastro') }}">Cadastro</a></li>
-                <li><a href="{{ url_for('eventos') }}">Gerenciar Eventos</a></li>
-                <li><a href="{{ url_for('inscricoes') }}">Inscrição em Eventos</a></li>
-                <li><a href="{{ url_for('visualizacao') }}">Visualização de Eventos</a></li>
-            </ul>
-        </nav>
-    </header>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/login.css') }}" />
+  </head>
+  <body>
     <main>
-        {% extends 'base.html' %}
+      {% extends 'base.html' %} {% block content %}
+      <section class="content-input">
+        <h1>Cadastre-se</h1>
+        <form class="form" method="post">
+          <input
+            placeholder="Nome:"
+            type="text"
+            id="nome"
+            name="nome"
+            required />
 
-        {% block content %}
-        <section class="cadastro">
-            <h1>Cadastro</h1>
-            <form method="post">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
-                
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" name="senha" required>
-                
-                <button type="submit">Cadastrar</button>
-            </form>
-        </section>
-        {% endblock %}        
+          <input
+            placeholder="E-mail:"
+            type="email"
+            id="email"
+            name="email"
+            required />
+
+          <select style="width: 105%;" name="usuario" id="usuario">
+            <option>Tipo de usuário</option>
+            <option value="normal">Usuário normal</option>
+            <option value="adm">Adm</option>
+          </select>
+
+          <input
+            placeholder="Nome Universidade:"
+            type="text"
+            id="universidade"
+            name="universidade"
+            required />
+
+          <input
+            placeholder="Senha:"
+            type="password"
+            id="senha"
+            name="senha"
+            required />
+
+          <button style="background: #28a745" type="submit">Cadastrar</button>
+          <div style="display: flex; align-items: center; gap: 0.5em; margin-top: -2em; font-size: 0.8em;">
+            <p style="color: var(--gray)">Já tem cadastro?</p>
+            <a href="{{ url_for('index') }}">Fazer login!</a>
+          </div>
+        </form>
+      </section>
+      {% endblock %}
     </main>
     <footer>
-        <p>&copy; 2024 - Projeto MVP</p>
+      <p>&copy; 2024 - Projeto MVP</p>
     </footer>
-</body>
+  </body>
 </html>
