@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto MVP</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/gerenciar_eventos.css') }}" />
 </head>
 <body>
    
@@ -16,9 +19,10 @@
             <h1>Visualização de Eventos</h1>
             <ul>
                 {% for evento in eventos %}
-                <li>
-                    <strong>{{ evento['titulo'] }}</strong> - {{ evento['descricao'] }}
-                </li>
+                <div class="form box-evento">
+                    <h2>{{ evento['titulo'] }}</h2>  
+                    <p> - {{ evento['descricao'] }}</p>
+                </div>
                 {% endfor %}
             </ul>
         </section>

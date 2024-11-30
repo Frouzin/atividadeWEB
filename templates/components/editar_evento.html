@@ -1,0 +1,32 @@
+<!-- templates/components/editar_evento.html -->
+<div class="overlay" id="overlay-editar-evento">
+    <div class="modal form">
+        <h2>Editar Evento</h2>
+        <form method="POST" action="/eventos/{{ evento['id'] }}/editar">
+            <label for="titulo">Título:</label>
+            <input type="text" name="titulo" id="titulo" value="{{ evento['titulo'] }}" required>
+
+            <label for="descricao">Descrição:</label>
+            <textarea name="descricao" id="descricao" required>{{ evento['descricao'] }}</textarea>
+
+            <label for="data">Data:</label>
+            <input type="date" name="data" id="data" value="{{ evento['data'] }}" required>
+
+            <label for="local">Local:</label>
+            <input type="text" name="local" id="local" value="{{ evento['local'] }}" required>
+
+            <label for="limite">Limite de Pessoas:</label>
+            <input type="number" name="limite" id="limite" value="{{ evento['limite'] }}" required>
+
+            <label for="opcao">Opção:</label>
+            <select name="opcao" id="opcao" required>
+                <option value="Presencial" {% if evento['opcao'] == 'Presencial' %}selected{% endif %}>Presencial</option>
+                <option value="Online" {% if evento['opcao'] == 'Online' %}selected{% endif %}>Online</option>
+            </select>
+            <div class="display-button">
+                <button type="submit">Salvar</button>
+                <button type="button" onclick="closeModal()" style="background-color: var(--secondary-color);">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>

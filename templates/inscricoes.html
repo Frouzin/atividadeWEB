@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto MVP</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/gerenciar_eventos.css') }}" />
 </head>
 <body>
     
@@ -16,12 +19,13 @@
             <h1>Inscrição em Eventos</h1>
             <ul>
                 {% for evento in eventos %}
-                <li>
-                    <strong>{{ evento['titulo'] }}</strong> - {{ evento['descricao'] }}
-                    <form method="post" action="/inscricao/{{ evento['id'] }}">
+                <div class="box-evento form">
+                    <h2>{{ evento['titulo'] }}</h2>
+                    <p> - {{ evento['descricao'] }}</p>
+                    <form class="display-button" method="post" action="/inscricao/{{ evento['id'] }}">
                         <button type="submit">Inscrever-se</button>
                     </form>
-                </li>
+                </div>
                 {% endfor %}
             </ul>
         

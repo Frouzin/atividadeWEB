@@ -35,47 +35,67 @@
           </div>
           <div>
             <label for="local">Local:</label>
-            <select style="width: 105%" name="local" id="local">
-              <option value="presencial">presencial</option>
+            <select style="width: 104%" name="local" id="local">
+              <option value="UNIT">UNIT</option>
               <option value="online">online</option>
             </select>
           </div>
           <div>
-            <label for="titulo">Limite de participantes:</label>
+            <label for="limite">Limite de participantes:</label>
             <input type="number" id="limite" name="limite" required />
           </div>
           <div>
-            <label for="titulo">Opcao de inscricao:</label>
+            <label for="opcao">Opcao de inscricao:</label>
             <input type="text" id="opcao" name="opcao" required />
           </div>
-          <button type="submit">Criar Evento</button>
+          <button type="submit">Publicar Evento</button>
         </form>
 
         <h1>Eventos Existentes</h2>
-        <ul>
+        
           {% for evento in eventos %}
-          <li>
-            <strong>{{ evento['titulo'] }}</strong> - {{ evento['descricao'] }}
+          <div class="box-evento form">
+            <h2>{{ evento['titulo'] }}</h2>
+            <p>{{ evento['local'] }} - {{ evento['data'] }}</p>
+            <div class="display-button">
             <form
               method="post"
-              action="/eventos/{{ evento['id'] }}/editar"
               style="display: inline">
-              <button type="submit">Editar</button>
+              <button type="button" onclick="openModal({{ evento|tojson|safe }})">Editar</button>
             </form>
             <form
               method="post"
               action="/eventos/{{ evento['id'] }}/deletar"
               style="display: inline">
-              <button type="submit">Excluir</button>
+              <button type="submit" style="background-color: var(--secondary-color);">Excluir</button>
             </form>
-          </li>
+          </div>
+          </div>
+
           {% endfor %}
-        </ul>
+        
       </section>
+
       {% endblock %}
+
+      {% include 'components/editar_evento.html' %}
+
     </main>
     <footer>
       <p>&copy; 2024 - Projeto MVP</p>
     </footer>
   </body>
-</html>
+  </html>
+<script>
+// Abrir modal
+function openModal(evento) {
+  // Código da função
+  document.getElementsByClassName('overlay')[0].style.display = 'flex';
+  populateModal(evento);
+}
+
+// Fechar modal
+function closeModal() {
+  document.getElementsByClassName('overlay').style.display = 'none';
+}
+</script>

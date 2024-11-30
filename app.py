@@ -38,7 +38,10 @@ def eventos():
             "id": len(db['eventos']) + 1,
             "titulo": request.form['titulo'],
             "descricao": request.form['descricao'],
-            "data": request.form['data']
+            "data": request.form['data'],
+            "local": request.form['local'],
+            "limite": request.form['limite'],
+            "opcao": request.form['opcao'],
         }
         # Adiciona evento ao banco de dados
         db['eventos'].append(novo_evento)
@@ -54,6 +57,9 @@ def editar_evento(evento_id):
         evento['titulo'] = request.form['titulo']
         evento['descricao'] = request.form['descricao']
         evento['data'] = request.form['data']
+        evento['local'] = request.form['local'].value
+        evento['limite'] = request.form['limite']
+        evento['opcao'] = request.form['opcao']
         return redirect(url_for('eventos'))
     return render_template('eventos.html', evento=evento)
 
